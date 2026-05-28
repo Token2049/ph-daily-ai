@@ -59,29 +59,34 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-primary-glow: var(--primary-glow);
+  --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.75rem;
+  /* Product Hunt CN palette — warm orange-red on a neutral surface */
+  --background: oklch(0.984 0.002 247);          /* #f8f9fa */
+  --foreground: oklch(0.235 0.005 230);          /* #191c1d */
+  --card: oklch(1 0 0);                          /* #ffffff (surface-container-lowest) */
+  --card-foreground: oklch(0.235 0.005 230);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.235 0.005 230);
+  --primary: oklch(0.52 0.17 36);                /* #a8320d */
+  --primary-foreground: oklch(1 0 0);
+  --primary-glow: oklch(0.6 0.18 38);            /* #ca4a25 */
+  --secondary: oklch(0.92 0.003 230);            /* surface-container-high */
+  --secondary-foreground: oklch(0.4 0.005 230);
+  --muted: oklch(0.95 0.003 230);                /* surface-container-low */
+  --muted-foreground: oklch(0.5 0.005 230);      /* #5f5e5e */
+  --accent: oklch(0.93 0.005 230);
+  --accent-foreground: oklch(0.235 0.005 230);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.88 0.02 40);                 /* outline-variant warm */
+  --input: oklch(0.92 0.005 230);
+  --ring: oklch(0.52 0.17 36);
+  --gradient-ai: linear-gradient(135deg, oklch(0.52 0.17 36), oklch(0.6 0.18 38));
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
