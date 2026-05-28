@@ -32,8 +32,8 @@ type PHNode = {
 };
 
 const PH_QUERY = `
-  query TodayPosts {
-    posts(order: VOTES, first: 20) {
+  query TodayPosts($postedAfter: DateTime!, $postedBefore: DateTime!) {
+    posts(order: VOTES, first: 30, postedAfter: $postedAfter, postedBefore: $postedBefore) {
       edges {
         node {
           id
@@ -52,7 +52,15 @@ const PH_QUERY = `
   }
 `;
 
+function todayUTCRange(): { postedAfter: string; postedBefore: string } {
+  const now = new Date();
+  const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
+  const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+  return { postedAfter: start.toISOString(), postedBefore: end.toISOString() };
+}
+
 async function fetchProductHunt(token: string): Promise<PHNode[]> {
+  const variables = todayUTCRange();
   const res = await fetch("https://api.producthunt.com/v2/api/graphql", {
     method: "POST",
     headers: {
@@ -60,7 +68,7 @@ async function fetchProductHunt(token: string): Promise<PHNode[]> {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({ query: PH_QUERY }),
+    body: JSON.stringify({ query: PH_QUERY, variables }),
   });
   if (!res.ok) {
     const text = await res.text();
