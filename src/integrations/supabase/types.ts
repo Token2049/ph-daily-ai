@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ph_products: {
+        Row: {
+          ai_zh_intro: string | null
+          ai_zh_tagline: string | null
+          comments_count: number
+          created_at: string
+          description: string | null
+          id: string
+          list_date: string
+          logo_url: string | null
+          name: string
+          ph_id: string
+          rank: number
+          tagline: string | null
+          topics: string[]
+          updated_at: string
+          url: string | null
+          votes_count: number
+        }
+        Insert: {
+          ai_zh_intro?: string | null
+          ai_zh_tagline?: string | null
+          comments_count?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          list_date: string
+          logo_url?: string | null
+          name: string
+          ph_id: string
+          rank: number
+          tagline?: string | null
+          topics?: string[]
+          updated_at?: string
+          url?: string | null
+          votes_count?: number
+        }
+        Update: {
+          ai_zh_intro?: string | null
+          ai_zh_tagline?: string | null
+          comments_count?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          list_date?: string
+          logo_url?: string | null
+          name?: string
+          ph_id?: string
+          rank?: number
+          tagline?: string | null
+          topics?: string[]
+          updated_at?: string
+          url?: string | null
+          votes_count?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
