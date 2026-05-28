@@ -145,5 +145,20 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-ai {
+    background-image: var(--gradient-ai);
+  }
+  .product-card-hover {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .product-card-hover:hover {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
   }
 }
