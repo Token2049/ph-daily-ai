@@ -234,7 +234,7 @@ export const refreshTodayProducts = createServerFn({ method: "POST" })
   .inputValidator(z.object({}).optional())
   .handler(async () => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const date = todayISO();
+    const date = todayPHDate();
     await supabaseAdmin.from("ph_products").delete().eq("list_date", date);
     return getTodayProducts();
   });
