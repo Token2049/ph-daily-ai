@@ -163,14 +163,14 @@ ${items
   return parsed.translations;
 }
 
-function todayISO(): string {
-  // Use UTC date — Product Hunt's "today" leaderboard rolls at UTC midnight
-  return new Date().toISOString().slice(0, 10);
+function todayPHDate(): string {
+  // Product Hunt's leaderboard rolls at midnight Pacific Time
+  return todayPHRange().phDate;
 }
 
 export const getTodayProducts = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const date = todayISO();
+  const date = todayPHDate();
 
   const { data: cached, error: readErr } = await supabaseAdmin
     .from("ph_products")
