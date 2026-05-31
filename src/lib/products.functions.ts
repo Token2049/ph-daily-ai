@@ -33,7 +33,7 @@ type PHNode = {
 
 const PH_QUERY = `
   query TodayPosts($postedAfter: DateTime!, $postedBefore: DateTime!) {
-    posts(order: VOTES, first: 30, postedAfter: $postedAfter, postedBefore: $postedBefore) {
+    posts(featured: true, order: RANKING, first: 30, postedAfter: $postedAfter, postedBefore: $postedBefore) {
       edges {
         node {
           id
@@ -52,19 +52,18 @@ const PH_QUERY = `
   }
 `;
 
-// Product Hunt's daily leaderboard rolls over at midnight Pacific Time (UTC-8/-7),
-// not UTC. Use PST (fixed UTC-8) for the day boundary to match the PH "today".
+// Product Hunt's API returns today's launch list when date filters are plain
+// YYYY-MM-DD strings. ISO timestamps can return an empty list even for valid days.
 function todayPHRange(): { postedAfter: string; postedBefore: string; phDate: string } {
   const PST_OFFSET_MS = 8 * 60 * 60 * 1000;
   const nowPst = new Date(Date.now() - PST_OFFSET_MS);
   const y = nowPst.getUTCFullYear();
   const m = nowPst.getUTCMonth();
   const d = nowPst.getUTCDate();
-  // PST midnight in UTC = that day 08:00 UTC
-  const start = new Date(Date.UTC(y, m, d, 8, 0, 0));
-  const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
   const phDate = `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-  return { postedAfter: start.toISOString(), postedBefore: end.toISOString(), phDate };
+  const next = new Date(Date.UTC(y, m, d + 1));
+  const postedBefore = `${next.getUTCFullYear()}-${String(next.getUTCMonth() + 1).padStart(2, "0")}-${String(next.getUTCDate()).padStart(2, "0")}`;
+  return { postedAfter: phDate, postedBefore, phDate };
 }
 
 async function fetchProductHunt(token: string): Promise<PHNode[]> {
