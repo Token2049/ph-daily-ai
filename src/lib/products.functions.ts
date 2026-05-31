@@ -68,7 +68,8 @@ function todayPHRange(): { postedAfter: string; postedBefore: string; phDate: st
 }
 
 async function fetchProductHunt(token: string): Promise<PHNode[]> {
-  const variables = todayUTCRange();
+  const { postedAfter, postedBefore } = todayPHRange();
+  const variables = { postedAfter, postedBefore };
   const res = await fetch("https://api.producthunt.com/v2/api/graphql", {
     method: "POST",
     headers: {
