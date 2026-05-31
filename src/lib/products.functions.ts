@@ -52,15 +52,24 @@ const PH_QUERY = `
   }
 `;
 
-function todayUTCRange(): { postedAfter: string; postedBefore: string } {
-  const now = new Date();
-  const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
+// Product Hunt's daily leaderboard rolls over at midnight Pacific Time (UTC-8/-7),
+// not UTC. Use PST (fixed UTC-8) for the day boundary to match the PH "today".
+function todayPHRange(): { postedAfter: string; postedBefore: string; phDate: string } {
+  const PST_OFFSET_MS = 8 * 60 * 60 * 1000;
+  const nowPst = new Date(Date.now() - PST_OFFSET_MS);
+  const y = nowPst.getUTCFullYear();
+  const m = nowPst.getUTCMonth();
+  const d = nowPst.getUTCDate();
+  // PST midnight in UTC = that day 08:00 UTC
+  const start = new Date(Date.UTC(y, m, d, 8, 0, 0));
   const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
-  return { postedAfter: start.toISOString(), postedBefore: end.toISOString() };
+  const phDate = `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+  return { postedAfter: start.toISOString(), postedBefore: end.toISOString(), phDate };
 }
 
 async function fetchProductHunt(token: string): Promise<PHNode[]> {
-  const variables = todayUTCRange();
+  const { postedAfter, postedBefore } = todayPHRange();
+  const variables = { postedAfter, postedBefore };
   const res = await fetch("https://api.producthunt.com/v2/api/graphql", {
     method: "POST",
     headers: {
@@ -154,14 +163,14 @@ ${items
   return parsed.translations;
 }
 
-function todayISO(): string {
-  // Use UTC date — Product Hunt's "today" leaderboard rolls at UTC midnight
-  return new Date().toISOString().slice(0, 10);
+function todayPHDate(): string {
+  // Product Hunt's leaderboard rolls at midnight Pacific Time
+  return todayPHRange().phDate;
 }
 
 export const getTodayProducts = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const date = todayISO();
+  const date = todayPHDate();
 
   const { data: cached, error: readErr } = await supabaseAdmin
     .from("ph_products")
@@ -225,7 +234,7 @@ export const refreshTodayProducts = createServerFn({ method: "POST" })
   .inputValidator(z.object({}).optional())
   .handler(async () => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const date = todayISO();
+    const date = todayPHDate();
     await supabaseAdmin.from("ph_products").delete().eq("list_date", date);
     return getTodayProducts();
   });
