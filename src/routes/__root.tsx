@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "ProductHunt" },
+      { name: "description", content: "Displays Product Hunt's daily top products with AI-generated Chinese summaries." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "ProductHunt" },
+      { property: "og:description", content: "Displays Product Hunt's daily top products with AI-generated Chinese summaries." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ProductHunt" },
+      { name: "twitter:description", content: "Displays Product Hunt's daily top products with AI-generated Chinese summaries." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b3f43384-cb34-4dd4-a776-fcb49ee3cbd1/id-preview-7a7e7a09--4af602b6-a4c5-475d-9906-afd2b2e91c73.lovable.app-1780208642239.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b3f43384-cb34-4dd4-a776-fcb49ee3cbd1/id-preview-7a7e7a09--4af602b6-a4c5-475d-9906-afd2b2e91c73.lovable.app-1780208642239.png" },
     ],
     links: [
       {
