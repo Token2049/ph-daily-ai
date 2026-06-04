@@ -8,7 +8,9 @@
 
 ## Overview
 
-**PH Daily AI** is a modern web application built with TypeScript that leverages AI to provide daily insights and updates from Product Hunt. This project combines cutting-edge technologies to deliver a seamless user experience.
+**PH Daily AI** is a modern web application built with TypeScript that leverages AI to provide daily insights and updates from Product Hunt. This project combines cutting-edge technologies to deliver seamless user experience.
+
+**🌐 Live Website**: https://ph-daily-ai.lovable.app
 
 ### Features
 
@@ -85,6 +87,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - GitHub: [@Token2049](https://github.com/Token2049)
 - Repository: [ph-daily-ai](https://github.com/Token2049/ph-daily-ai)
+- Live Site: https://ph-daily-ai.lovable.app
 
 ---
 
@@ -93,6 +96,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 项目概述
 
 **PH Daily AI** 是一个使用 TypeScript 构建的现代化网络应用，利用 AI 技术为用户提供 Product Hunt 的每日洞察和更新。该项目结合了最新的技术来提供无缝的用户体验。
+
+**🌐 在线网站**: https://ph-daily-ai.lovable.app
 
 ### 主要功能
 
@@ -169,4 +174,4 @@ ph-daily-ai/
 
 - GitHub: [@Token2049](https://github.com/Token2049)
 - 仓库: [ph-daily-ai](https://github.com/Token2049/ph-daily-ai)
-
+- 在线网站: https://ph-daily-ai.lovable.app
