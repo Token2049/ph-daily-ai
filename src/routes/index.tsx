@@ -72,6 +72,36 @@ function HomePage() {
   const refresh = useServerFn(refreshTodayProducts);
   const router = useRouter();
   const [refreshing, setRefreshing] = useState(false);
+  const [mode, setMode] = useState<"fair" | "original">("fair");
+  const [lambda, setLambda] = useState(0.45);
+
+  const board = useMemo(() => {
+    const raw: RankItem[] = data.products.map((p, i) => ({
+      id: p.id,
+      name: p.name,
+      votes: p.votes_count,
+      comments: p.comments_count,
+      topics: p.topics,
+      hasIntro: Boolean(p.ai_zh_intro),
+      originalRank: i + 1,
+    }));
+    return buildFairBoard(raw, { lambda });
+  }, [data.products, lambda]);
+
+  const byId = useMemo(() => {
+    const map = new Map<string, Product>();
+    data.products.forEach((p) => map.set(p.id, p));
+    return map;
+  }, [data.products]);
+
+  const list =
+    mode === "fair"
+      ? board.fair.map((it) => ({
+          product: byId.get(it.id)!,
+          rankDelta: it.rankDelta,
+          isRisingNewcomer: it.isRisingNewcomer,
+        }))
+      : data.products.map((p) => ({ product: p, rankDelta: undefined, isRisingNewcomer: false }));
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -92,7 +122,7 @@ function HomePage() {
       <header className="bg-card sticky top-0 z-50 border-b border-border">
         <div className="flex justify-between items-center max-w-[1120px] mx-auto px-4 md:px-10 h-16">
           <div className="flex items-center gap-4">
-            <span className="text-lg md:text-xl font-bold text-primary">Product Hunt CN</span>
+            <span className="text-lg md:text-xl font-bold text-primary">新人公平曝光榜</span>
             <span className="hidden md:block w-px h-6 bg-border" />
             <span className="hidden md:block text-sm text-muted-foreground">
               今日榜单 · {dateLabel}
@@ -110,21 +140,43 @@ function HomePage() {
       </header>
 
       <main className="max-w-[800px] mx-auto px-4 md:px-0 py-6 md:py-10">
-        <div className="md:hidden mb-4">
-          <h1 className="text-2xl font-bold text-foreground">今日榜单</h1>
-          <p className="text-sm text-muted-foreground">{dateLabel}</p>
+        <div className="mb-5">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight">
+            中文版 Product Hunt 新人公平曝光辅助系统
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1 flex items-center gap-1.5">
+            <Sparkles className="w-4 h-4 text-primary" />
+            {dateLabel} · AI 中文解读 + 去偏公平曝光重排，让优质新作被看见
+          </p>
         </div>
-        <div className="hidden md:flex items-end justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground tracking-tight">
-              今日全球热门产品
-            </h1>
-            <p className="text-sm text-muted-foreground mt-1 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-primary" />
-              每一个产品都附带 AI 中文一句话解读，10 秒看懂
-            </p>
-          </div>
-        </div>
+
+        {data.products.length > 0 && (
+          <>
+            <FairExposurePanel
+              before={board.before}
+              after={board.after}
+              rounds={board.rounds}
+              lambda={lambda}
+              onLambdaChange={setLambda}
+            />
+
+            <div className="inline-flex rounded-lg border border-border overflow-hidden mb-4">
+              {(["fair", "original"] as const).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => setMode(m)}
+                  className={`px-3 py-1.5 text-xs md:text-sm transition-colors ${
+                    mode === m
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-card text-muted-foreground hover:text-primary"
+                  }`}
+                >
+                  {m === "fair" ? "公平曝光榜" : "原始 Top 榜"}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
 
         {data.products.length === 0 ? (
           <div className="text-center py-20 text-muted-foreground">
@@ -135,11 +187,18 @@ function HomePage() {
           </div>
         ) : (
           <section className="flex flex-col gap-3 md:gap-4">
-            {data.products.map((p, i) => (
-              <ProductCard key={p.id} product={p} rank={i + 1} />
+            {list.map((it, i) => (
+              <ProductCard
+                key={it.product.id}
+                product={it.product}
+                rank={i + 1}
+                rankDelta={it.rankDelta}
+                isRisingNewcomer={it.isRisingNewcomer}
+              />
             ))}
           </section>
         )}
+
 
         <footer className="text-center text-xs text-muted-foreground mt-12 pb-8">
           数据来自 Product Hunt 官方 API · 中文解读由 AI 自动生成，仅供参考
