@@ -18,17 +18,22 @@ const todayQueryOptions = queryOptions({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Product Hunt CN | 一句话看懂今日全球热门产品" },
+      { title: "中文版 Product Hunt 新人公平曝光辅助系统" },
       {
         name: "description",
-        content: "每天自动抓取 Product Hunt 今日榜单，AI 中文解读，10 秒了解全球最新热门产品。",
+        content:
+          "抓取 Product Hunt 今日榜单，AI 中文解读，并用去偏公平曝光算法重排，让优质新作不被头部噪音淹没。",
       },
-      { property: "og:title", content: "Product Hunt CN | 一句话看懂今日全球热门产品" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "中文版 Product Hunt 新人公平曝光辅助系统" },
       {
         property: "og:description",
-        content: "每天自动抓取 Product Hunt 今日榜单，AI 中文解读，10 秒了解全球最新热门产品。",
+        content:
+          "抓取 Product Hunt 今日榜单，AI 中文解读，并用去偏公平曝光算法重排，让优质新作不被头部噪音淹没。",
       },
     ],
+
     links: [
       {
         rel: "stylesheet",
