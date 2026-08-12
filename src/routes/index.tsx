@@ -1,10 +1,13 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { RefreshCw, Sparkles } from "lucide-react";
-import { getTodayProducts, refreshTodayProducts } from "@/lib/products.functions";
+import { getTodayProducts, refreshTodayProducts, type Product } from "@/lib/products.functions";
 import { ProductCard } from "@/components/ProductCard";
+import { FairExposurePanel } from "@/components/FairExposurePanel";
+import { buildFairBoard, type RankItem } from "@/lib/fair-exposure";
+
 
 const todayQueryOptions = queryOptions({
   queryKey: ["ph-today"],
