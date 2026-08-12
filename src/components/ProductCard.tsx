@@ -1,12 +1,29 @@
-import { ArrowUp, MessageCircle, Sparkles, ExternalLink } from "lucide-react";
+import { ArrowUp, MessageCircle, Sparkles, ExternalLink, Rocket, ChevronUp } from "lucide-react";
 import type { Product } from "@/lib/products.functions";
 
-export function ProductCard({ product, rank }: { product: Product; rank: number }) {
+export function ProductCard({
+  product,
+  rank,
+  rankDelta,
+  isRisingNewcomer,
+}: {
+  product: Product;
+  rank: number;
+  rankDelta?: number;
+  isRisingNewcomer?: boolean;
+}) {
   return (
     <article className="product-card-hover bg-card border border-border rounded-xl p-4 md:p-5 flex gap-4 items-start">
       <div className="hidden sm:flex flex-col items-center w-6 pt-2 text-muted-foreground text-sm font-semibold">
         {rank}
+        {typeof rankDelta === "number" && rankDelta > 0 && (
+          <span className="text-[10px] text-primary font-bold inline-flex items-center">
+            <ChevronUp className="w-3 h-3" />
+            {rankDelta}
+          </span>
+        )}
       </div>
+
 
       <div className="w-14 h-14 md:w-20 md:h-20 flex-shrink-0 bg-muted rounded-lg overflow-hidden flex items-center justify-center">
         {product.logo_url ? (
@@ -32,7 +49,14 @@ export function ProductCard({ product, rank }: { product: Product; rank: number 
               AI 解读
             </span>
           )}
+          {isRisingNewcomer && (
+            <span className="border border-primary/50 text-primary px-2 py-0.5 rounded text-[10px] font-bold inline-flex items-center gap-1">
+              <Rocket className="w-3 h-3" />
+              优质新人
+            </span>
+          )}
         </div>
+
 
         <p className="text-sm md:text-base text-muted-foreground mb-1">
           {product.ai_zh_tagline ?? product.tagline}
