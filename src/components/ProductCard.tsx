@@ -49,7 +49,14 @@ export function ProductCard({
               AI 解读
             </span>
           )}
+          {isRisingNewcomer && (
+            <span className="border border-primary/50 text-primary px-2 py-0.5 rounded text-[10px] font-bold inline-flex items-center gap-1">
+              <Rocket className="w-3 h-3" />
+              优质新人
+            </span>
+          )}
         </div>
+
 
         <p className="text-sm md:text-base text-muted-foreground mb-1">
           {product.ai_zh_tagline ?? product.tagline}
