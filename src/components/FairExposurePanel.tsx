@@ -113,12 +113,13 @@ export function FairExposurePanel({
         </p>
         <div className="flex items-end gap-1.5 h-20">
           {rounds.map((r) => (
-            <div key={r.round} className="flex-1 flex flex-col items-center gap-1">
+            <div key={r.round} className="flex-1 h-full flex flex-col justify-end items-center gap-1">
               <div
                 className="w-full bg-primary/80 rounded-t"
-                style={{ height: `${(r.tailExposureShare / maxTail) * 100}%`, minHeight: 2 }}
+                style={{ height: `${(r.tailExposureShare / maxTail) * 85}%`, minHeight: 3 }}
                 title={`第 ${r.round} 轮：长尾曝光 ${pct(r.tailExposureShare)}，Gini ${r.gini.toFixed(3)}`}
               />
+
               <span className="text-[10px] text-muted-foreground">t{r.round}</span>
             </div>
           ))}
