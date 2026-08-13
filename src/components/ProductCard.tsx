@@ -1,4 +1,5 @@
 import { ArrowUp, MessageCircle, Sparkles, ExternalLink, Rocket, ChevronUp } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { Product } from "@/lib/products.functions";
 
 export function ProductCard({
@@ -41,7 +42,13 @@ export function ProductCard({
       <div className="flex-grow min-w-0">
         <div className="flex items-center gap-2 mb-1 flex-wrap">
           <h3 className="text-lg md:text-xl font-semibold text-foreground truncate">
-            {product.name}
+            <Link
+              to="/product/$id"
+              params={{ id: product.id }}
+              className="hover:text-primary transition-colors"
+            >
+              {product.name}
+            </Link>
           </h3>
           {product.ai_zh_intro && (
             <span className="bg-gradient-ai text-primary-foreground px-2 py-0.5 rounded text-[10px] font-bold tracking-wider inline-flex items-center gap-1">
