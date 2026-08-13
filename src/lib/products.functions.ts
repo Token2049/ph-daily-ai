@@ -237,3 +237,16 @@ export const refreshTodayProducts = createServerFn({ method: "POST" })
     await supabaseAdmin.from("ph_products").delete().eq("list_date", date);
     return getTodayProducts();
   });
+
+export const getProductById = createServerFn({ method: "GET" })
+  .inputValidator((d: unknown) => z.object({ id: z.string() }).parse(d))
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row, error } = await supabaseAdmin
+      .from("ph_products")
+      .select("*")
+      .eq("id", data.id)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    return { product: (row as Product | null) ?? null };
+  });
