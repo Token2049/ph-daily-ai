@@ -119,15 +119,8 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-card sticky top-0 z-50 border-b border-border">
-        <div className="flex justify-between items-center max-w-[1120px] mx-auto px-4 md:px-10 h-16">
-          <div className="flex items-center gap-4">
-            <span className="text-lg md:text-xl font-bold text-primary">新人公平曝光榜</span>
-            <span className="hidden md:block w-px h-6 bg-border" />
-            <span className="hidden md:block text-sm text-muted-foreground">
-              今日榜单 · {dateLabel}
-            </span>
-          </div>
+      <SiteHeader
+        right={
           <button
             onClick={handleRefresh}
             disabled={refreshing}
@@ -136,8 +129,9 @@ function HomePage() {
             <RefreshCw className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`} />
             <span>{refreshing ? "更新中" : "刷新"}</span>
           </button>
-        </div>
-      </header>
+        }
+      />
+
 
       <main className="max-w-[800px] mx-auto px-4 md:px-0 py-6 md:py-10">
         <div className="mb-5">
