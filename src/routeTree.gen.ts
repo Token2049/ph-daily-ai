@@ -15,6 +15,7 @@ import { Route as NewcomersRouteImport } from './routes/newcomers'
 import { Route as ArchiveRouteImport } from './routes/archive'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AlgorithmRouteImport } from './routes/algorithm'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 
@@ -48,6 +49,11 @@ const AlgorithmRoute = AlgorithmRouteImport.update({
   path: '/algorithm',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -61,6 +67,7 @@ const ProductIdRoute = ProductIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/algorithm': typeof AlgorithmRoute
   '/analytics': typeof AnalyticsRoute
   '/archive': typeof ArchiveRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/algorithm': typeof AlgorithmRoute
   '/analytics': typeof AnalyticsRoute
   '/archive': typeof ArchiveRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/algorithm': typeof AlgorithmRoute
   '/analytics': typeof AnalyticsRoute
   '/archive': typeof ArchiveRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/algorithm'
     | '/analytics'
     | '/archive'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/algorithm'
     | '/analytics'
     | '/archive'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/algorithm'
     | '/analytics'
     | '/archive'
@@ -125,6 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   AlgorithmRoute: typeof AlgorithmRoute
   AnalyticsRoute: typeof AnalyticsRoute
   ArchiveRoute: typeof ArchiveRoute
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlgorithmRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -197,6 +217,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   AlgorithmRoute: AlgorithmRoute,
   AnalyticsRoute: AnalyticsRoute,
   ArchiveRoute: ArchiveRoute,
