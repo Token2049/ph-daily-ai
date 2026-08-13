@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TopicsRouteImport } from './routes/topics'
 import { Route as NewcomersRouteImport } from './routes/newcomers'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 
+const TopicsRoute = TopicsRouteImport.update({
+  id: '/topics',
+  path: '/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewcomersRoute = NewcomersRouteImport.update({
   id: '/newcomers',
   path: '/newcomers',
@@ -32,35 +38,46 @@ const ProductIdRoute = ProductIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/newcomers': typeof NewcomersRoute
+  '/topics': typeof TopicsRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/newcomers': typeof NewcomersRoute
+  '/topics': typeof TopicsRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/newcomers': typeof NewcomersRoute
+  '/topics': typeof TopicsRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/newcomers' | '/product/$id'
+  fullPaths: '/' | '/newcomers' | '/topics' | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/newcomers' | '/product/$id'
-  id: '__root__' | '/' | '/newcomers' | '/product/$id'
+  to: '/' | '/newcomers' | '/topics' | '/product/$id'
+  id: '__root__' | '/' | '/newcomers' | '/topics' | '/product/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NewcomersRoute: typeof NewcomersRoute
+  TopicsRoute: typeof TopicsRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/topics': {
+      id: '/topics'
+      path: '/topics'
+      fullPath: '/topics'
+      preLoaderRoute: typeof TopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/newcomers': {
       id: '/newcomers'
       path: '/newcomers'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NewcomersRoute: NewcomersRoute,
+  TopicsRoute: TopicsRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
