@@ -7,6 +7,8 @@ import { getTodayProducts, refreshTodayProducts, type Product } from "@/lib/prod
 import { ProductCard } from "@/components/ProductCard";
 import { FairExposurePanel } from "@/components/FairExposurePanel";
 import { buildFairBoard, type RankItem } from "@/lib/fair-exposure";
+import { SiteHeader } from "@/components/SiteHeader";
+
 
 
 const todayQueryOptions = queryOptions({
