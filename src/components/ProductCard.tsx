@@ -1,4 +1,5 @@
 import { ArrowUp, MessageCircle, Sparkles, ExternalLink, Rocket, ChevronUp } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { Product } from "@/lib/products.functions";
 
 export function ProductCard({
