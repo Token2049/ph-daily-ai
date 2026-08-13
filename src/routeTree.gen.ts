@@ -9,9 +9,51 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TopicsRouteImport } from './routes/topics'
+import { Route as SimulationRouteImport } from './routes/simulation'
+import { Route as NewcomersRouteImport } from './routes/newcomers'
+import { Route as ArchiveRouteImport } from './routes/archive'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AlgorithmRouteImport } from './routes/algorithm'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 
+const TopicsRoute = TopicsRouteImport.update({
+  id: '/topics',
+  path: '/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulationRoute = SimulationRouteImport.update({
+  id: '/simulation',
+  path: '/simulation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewcomersRoute = NewcomersRouteImport.update({
+  id: '/newcomers',
+  path: '/newcomers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArchiveRoute = ArchiveRouteImport.update({
+  id: '/archive',
+  path: '/archive',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlgorithmRoute = AlgorithmRouteImport.update({
+  id: '/algorithm',
+  path: '/algorithm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +67,137 @@ const ProductIdRoute = ProductIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/algorithm': typeof AlgorithmRoute
+  '/analytics': typeof AnalyticsRoute
+  '/archive': typeof ArchiveRoute
+  '/newcomers': typeof NewcomersRoute
+  '/simulation': typeof SimulationRoute
+  '/topics': typeof TopicsRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/algorithm': typeof AlgorithmRoute
+  '/analytics': typeof AnalyticsRoute
+  '/archive': typeof ArchiveRoute
+  '/newcomers': typeof NewcomersRoute
+  '/simulation': typeof SimulationRoute
+  '/topics': typeof TopicsRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/algorithm': typeof AlgorithmRoute
+  '/analytics': typeof AnalyticsRoute
+  '/archive': typeof ArchiveRoute
+  '/newcomers': typeof NewcomersRoute
+  '/simulation': typeof SimulationRoute
+  '/topics': typeof TopicsRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/product/$id'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/algorithm'
+    | '/analytics'
+    | '/archive'
+    | '/newcomers'
+    | '/simulation'
+    | '/topics'
+    | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/product/$id'
-  id: '__root__' | '/' | '/product/$id'
+  to:
+    | '/'
+    | '/about'
+    | '/algorithm'
+    | '/analytics'
+    | '/archive'
+    | '/newcomers'
+    | '/simulation'
+    | '/topics'
+    | '/product/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/algorithm'
+    | '/analytics'
+    | '/archive'
+    | '/newcomers'
+    | '/simulation'
+    | '/topics'
+    | '/product/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AlgorithmRoute: typeof AlgorithmRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  ArchiveRoute: typeof ArchiveRoute
+  NewcomersRoute: typeof NewcomersRoute
+  SimulationRoute: typeof SimulationRoute
+  TopicsRoute: typeof TopicsRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/topics': {
+      id: '/topics'
+      path: '/topics'
+      fullPath: '/topics'
+      preLoaderRoute: typeof TopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulation': {
+      id: '/simulation'
+      path: '/simulation'
+      fullPath: '/simulation'
+      preLoaderRoute: typeof SimulationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newcomers': {
+      id: '/newcomers'
+      path: '/newcomers'
+      fullPath: '/newcomers'
+      preLoaderRoute: typeof NewcomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/archive': {
+      id: '/archive'
+      path: '/archive'
+      fullPath: '/archive'
+      preLoaderRoute: typeof ArchiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/algorithm': {
+      id: '/algorithm'
+      path: '/algorithm'
+      fullPath: '/algorithm'
+      preLoaderRoute: typeof AlgorithmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AlgorithmRoute: AlgorithmRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  ArchiveRoute: ArchiveRoute,
+  NewcomersRoute: NewcomersRoute,
+  SimulationRoute: SimulationRoute,
+  TopicsRoute: TopicsRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
