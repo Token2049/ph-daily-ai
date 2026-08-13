@@ -250,3 +250,34 @@ export const getProductById = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     return { product: (row as Product | null) ?? null };
   });
+
+export const getArchiveDates = createServerFn({ method: "GET" }).handler(async () => {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { data, error } = await supabaseAdmin
+    .from("ph_products")
+    .select("list_date, votes_count")
+    .order("list_date", { ascending: false })
+    .limit(2000);
+  if (error) throw new Error(error.message);
+  const map = new Map<string, { date: string; count: number; votes: number }>();
+  (data ?? []).forEach((r: { list_date: string; votes_count: number }) => {
+    const cur = map.get(r.list_date) ?? { date: r.list_date, count: 0, votes: 0 };
+    cur.count += 1;
+    cur.votes += r.votes_count ?? 0;
+    map.set(r.list_date, cur);
+  });
+  return { days: [...map.values()].sort((a, b) => (a.date < b.date ? 1 : -1)) };
+});
+
+export const getProductsByDate = createServerFn({ method: "GET" })
+  .inputValidator((d: unknown) => z.object({ date: z.string() }).parse(d))
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows, error } = await supabaseAdmin
+      .from("ph_products")
+      .select("*")
+      .eq("list_date", data.date)
+      .order("rank", { ascending: true });
+    if (error) throw new Error(error.message);
+    return { date: data.date, products: (rows ?? []) as Product[] };
+  });
