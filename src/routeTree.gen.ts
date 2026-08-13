@@ -13,6 +13,7 @@ import { Route as TopicsRouteImport } from './routes/topics'
 import { Route as SimulationRouteImport } from './routes/simulation'
 import { Route as NewcomersRouteImport } from './routes/newcomers'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AlgorithmRouteImport } from './routes/algorithm'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 
@@ -36,6 +37,11 @@ const AnalyticsRoute = AnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlgorithmRoute = AlgorithmRouteImport.update({
+  id: '/algorithm',
+  path: '/algorithm',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const ProductIdRoute = ProductIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/algorithm': typeof AlgorithmRoute
   '/analytics': typeof AnalyticsRoute
   '/newcomers': typeof NewcomersRoute
   '/simulation': typeof SimulationRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/algorithm': typeof AlgorithmRoute
   '/analytics': typeof AnalyticsRoute
   '/newcomers': typeof NewcomersRoute
   '/simulation': typeof SimulationRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/algorithm': typeof AlgorithmRoute
   '/analytics': typeof AnalyticsRoute
   '/newcomers': typeof NewcomersRoute
   '/simulation': typeof SimulationRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/algorithm'
     | '/analytics'
     | '/newcomers'
     | '/simulation'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/algorithm'
     | '/analytics'
     | '/newcomers'
     | '/simulation'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/algorithm'
     | '/analytics'
     | '/newcomers'
     | '/simulation'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlgorithmRoute: typeof AlgorithmRoute
   AnalyticsRoute: typeof AnalyticsRoute
   NewcomersRoute: typeof NewcomersRoute
   SimulationRoute: typeof SimulationRoute
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/algorithm': {
+      id: '/algorithm'
+      path: '/algorithm'
+      fullPath: '/algorithm'
+      preLoaderRoute: typeof AlgorithmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlgorithmRoute: AlgorithmRoute,
   AnalyticsRoute: AnalyticsRoute,
   NewcomersRoute: NewcomersRoute,
   SimulationRoute: SimulationRoute,
