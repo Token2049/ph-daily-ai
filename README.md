@@ -8,13 +8,13 @@
 
 ## Overview
 
-**PH Daily AI** is a modern web application built with TypeScript that leverages AI to provide daily insights and updates from Product Hunt. This project combines cutting-edge technologies to deliver seamless user experience.
+**PH Daily AI** is a modern web application built with TypeScript that leverages AI to provide daily insights and updates from Product Hunt. This project combines cutting-edge technologies to deliver a seamless user experience, aggregating Product Hunt's top launches and producing concise, actionable summaries and trend analysis.
 
 **🌐 Live Website**: https://ph-daily-ai.lovable.app
 
 ### Features
 
-- 🤖 **AI-Powered Insights**: Intelligent analysis of Product Hunt daily trends
+- 🤖 **AI-Powered Insights**: Intelligent analysis of Product Hunt daily trends, summaries, and highlights
 - ⚡ **Fast & Responsive**: Built with modern web technologies for optimal performance
 - 🎨 **Beautiful UI**: Clean and intuitive user interface
 - 📱 **Mobile Friendly**: Fully responsive design
@@ -22,10 +22,10 @@
 
 ### Tech Stack
 
-- **Frontend**: TypeScript (95.7%)
-- **Styling**: CSS (3.1%)
+- **Frontend**: TypeScript (96.7%)
+- **Styling**: CSS (2.3%)
 - **Framework**: TanStack Start
-- **Other**: Supporting libraries and utilities (1.2%)
+- **Other**: Supporting libraries and utilities (1%)
 
 ### Project Structure
 
@@ -43,7 +43,7 @@ ph-daily-ai/
 ### Getting Started
 
 #### Prerequisites
-- Node.js 16+ 
+- Node.js 16+
 - npm or yarn package manager
 
 #### Installation
@@ -77,7 +77,7 @@ ph-daily-ai/
 
 ### Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. If you're reporting an issue or proposing a feature, open an issue first so we can discuss the change.
 
 ### License
 
@@ -95,24 +95,24 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 项目概述
 
-**PH Daily AI** 是一个使用 TypeScript 构建的现代化网络应用，利用 AI 技术为用户提供 Product Hunt 的每日洞察和更新。该项目结合了最新的技术来提供无缝的用户体验。
+**PH Daily AI** 是一个使用 TypeScript 构建的现代化网络应用，利用 AI 技术为用户提供 Product Hunt 的每日洞察和更新。该项目结合了最新的技术来提供无缝的用户体验，汇总 Product Hunt 的热门发布，并生成简明、可操作的摘要与趋势分析。
 
 **🌐 在线网站**: https://ph-daily-ai.lovable.app
 
 ### 主要功能
 
-- 🤖 **AI 驱动的洞察**: 对 Product Hunt 日常趋势的智能分析
-- ⚡ **快速响应**: 采用现代网络技术构建，性能最优
+- 🤖 **AI 驱动的洞察**: 对 Product Hunt 日常趋势的智能分析、摘要与要点
+- ⚡ **快速响应**: 采用现代网络技术构建，性能优越
 - 🎨 **精美界面**: 简洁直观的用户界面
 - 📱 **移动友好**: 完全响应式设计
 - 🔄 **实时更新**: 随时掌握最新的 Product Hunt 产品
 
 ### 技术栈
 
-- **前端**: TypeScript (95.7%)
-- **样式**: CSS (3.1%)
+- **前端**: TypeScript (96.7%)
+- **样式**: CSS (2.3%)
 - **框架**: TanStack Start
-- **其他**: 支持库和工具 (1.2%)
+- **其他**: 支持库和工具 (1%)
 
 ### 项目结构
 
@@ -130,7 +130,7 @@ ph-daily-ai/
 ### 快速开始
 
 #### 系统要求
-- Node.js 16+ 
+- Node.js 16+
 - npm 或 yarn 包管理器
 
 #### 安装步骤
@@ -164,7 +164,7 @@ ph-daily-ai/
 
 ### 贡献指南
 
-欢迎提交 Pull Request 或报告问题！
+欢迎提交 Pull Request 或报告问题！在提交大的更改之前，建议先打开 issue 讨论。
 
 ### 许可证
 
